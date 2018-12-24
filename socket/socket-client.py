@@ -8,5 +8,12 @@ import socket
 client = socket.socket(socket.AF_INET,socket.SOCK_STREAM)
 #绑定IP和端口
 client.connect(('localhost',8000))
-client.send("boddy".encode("utf8"))
-#client.close()
+while True:
+    msg = input('client:')
+    if msg != 'exit':
+        client.send(msg.encode('utf8'))
+        print('server:{}'.format(client.recv(1024).decode('utf8')))
+    else:
+        break
+
+client.close()
